@@ -84,9 +84,9 @@ public final class SortAlgos {
                 int n = vec.length;
                 int currentPos, insPos; 
                 for (currentPos = 1; currentPos < n; currentPos++) {
-                        insPos = findInsPosition(vec, currentPos - 1, 
+                        insPos = _findInsPosition(vec, currentPos - 1, 
                                         vec[currentPos].key);
-                        insertAtPosition(vec, insPos, currentPos);
+                        _insertAtPosition(vec, insPos, currentPos);
                 }   
         }
         
@@ -97,7 +97,7 @@ public final class SortAlgos {
          * @param x the value determining the position 
          * @return the insertion position 
          */
-        private static int findInsPosition(Item[] vec, int range, int x) {
+        private static int _findInsPosition(Item[] vec, int range, int x) {
                 int index;   // variable to hold the position
                 int i,j,k;
                 i = 0; j = range; // initialize lower index i and upper index j
@@ -125,7 +125,7 @@ public final class SortAlgos {
          * @param fromPos the position whose value 
          * has to be inserted at <code>insPos</code>
          */
-        private static void insertAtPosition(Item[] vec, int insPos, 
+        private static void _insertAtPosition(Item[] vec, int insPos, 
                                                          int fromPos ) {
                 if (insPos == fromPos) return;
                 System.out.println("here");
@@ -144,7 +144,7 @@ public final class SortAlgos {
         public static void mergeSort(Item vec[]) 
                                 throws NullPointerException {
                 if (vec == null) throw new NullPointerException();
-                mergeSort(vec, 0, vec.length - 1);
+                _mergeSort(vec, 0, vec.length - 1);
         }
         
         
@@ -155,7 +155,7 @@ public final class SortAlgos {
          * @param middle end of the first range
          * @param right end of the second range
          */
-        private static void merge(Item[] vec, int left, int middle, int right) {
+        private static void _merge(Item[] vec, int left, int middle, int right) {
                 int i, j;
                 int m = middle - left + 1; // length of first array region
                 int n = right - middle;    // length of second array region
@@ -195,13 +195,13 @@ public final class SortAlgos {
          * @param first start of the range
          * @param last end of the range
          */
-        private static void mergeSort(Item[] vec, int first, int last) {
+        private static void _mergeSort(Item[] vec, int first, int last) {
                 if (first == last) return;	
                 // devide vec into 2 equal parts
                 int middle = (first + last) / 2; 
-                mergeSort(vec, first, middle);   // sort the first part
-                mergeSort(vec, middle+1, last);  // sort the second part
-                merge(vec, first, middle, last); // merge the 2 sorted parts
+                _mergeSort(vec, first, middle);   // sort the first part
+                _mergeSort(vec, middle+1, last);  // sort the second part
+                _merge(vec, first, middle, last); // merge the 2 sorted parts
         }
     
     
@@ -214,7 +214,7 @@ public final class SortAlgos {
         public static void quickSort(Item[] vec) 
                                 throws NullPointerException {
                 if (vec == null) throw new NullPointerException();
-                quickSort(vec, 0, vec.length - 1);
+                _quickSort(vec, 0, vec.length - 1);
         }
         
         /**
@@ -223,7 +223,7 @@ public final class SortAlgos {
          * @param loBound start of the range
          * @param hiBound end of the range
          */
-        private static void quickSort(Item[] vec, int loBound, int hiBound) {
+        private static void _quickSort(Item[] vec, int loBound, int hiBound) {
                 int loSwap, hiSwap;
                 int pivotKey, pivotIndex;
                 Item temp, pivotItem;
@@ -272,10 +272,10 @@ public final class SortAlgos {
                 vec[hiSwap] = pivotItem;
         
                 if (loBound < hiSwap-1)     // 2 or more items in 1st subvec
-                        quickSort(vec, loBound, hiSwap-1);
+                        _quickSort(vec, loBound, hiSwap-1);
         
                 if (hiSwap+1 < hiBound)     // 2 or more items in 2nd subvec
-                        quickSort(vec, hiSwap+1, hiBound);
+                        _quickSort(vec, hiSwap+1, hiBound);
         }
     
     
@@ -285,7 +285,7 @@ public final class SortAlgos {
          * @param top start of the range
          * @param bottom end of the range
          */
-        private static void heapify(Item[] vec, int top, int bottom) {
+        private static void _heapify(Item[] vec, int top, int bottom) {
                 Item temp;
                 int child;
             
@@ -308,7 +308,7 @@ public final class SortAlgos {
                         vec[top] = vec[child]; 
                         vec[child] = temp;
                         // recursive call for possible further exchanges
-                        heapify(vec, child, bottom); 
+                        _heapify(vec, child, bottom); 
                 }//endif
         }
     
@@ -316,9 +316,9 @@ public final class SortAlgos {
          * turns array into a heap
          * @param vec the array to which this happens
          */
-        private static void createHeap(Item[] vec) {
+        private static void _createHeap(Item[] vec) {
                 for (int i = vec.length/2 - 1; i >= 0; i--) {
-                        heapify(vec, i, vec.length - 1);
+                        _heapify(vec, i, vec.length - 1);
                 }
         }
     
@@ -334,7 +334,7 @@ public final class SortAlgos {
                 int last;
                 int n = vec.length;
             
-                createHeap(vec);
+                _createHeap(vec);
                 for (last = n-1; last > 0; last--) {
                         // exchange top component with 
                         // current last component of vec
@@ -342,7 +342,7 @@ public final class SortAlgos {
                         vec[0] = vec[last]; 
                         vec[last] = temp;
                         // call Heapify to to reestablish heap property
-                        heapify(vec, 0, last-1);
+                        _heapify(vec, 0, last-1);
                 }//endfor
         }
 
