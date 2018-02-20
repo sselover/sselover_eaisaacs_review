@@ -37,6 +37,13 @@ public class SortDemoData  {
                         // generate a random vector with entries 1 ... n
                         str = inputTokens.nextToken(); 
                         n =  Integer.valueOf(str).intValue(); 
+                        
+                        // SER 316, bug-8: throw exception if number of inputs is 1
+                        // && only input is 0
+                        if (n == 0) {
+                        	throw new NoSuchElementException();
+                        }
+                        
                         // may throw NegativeArraySizeException
                         myArray = new Item[n];
                         boolean[] tempArray = new boolean[n + 1];
