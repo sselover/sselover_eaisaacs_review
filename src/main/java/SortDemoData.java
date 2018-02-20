@@ -89,11 +89,7 @@ public class SortDemoData  {
                         //if (choice < 0 || choice > 5) choice = 0;
                         
                         // SER 316, bug-4: Changed switch statement to if-else statements
-                        if (choice == 0) {
-                        	SortAlgos.bubbleSort(myArray);
-                        	algo = "Bubble Sort";
-                        }
-                        else if (choice == 1) {
+                        if (choice == 1) {
                         	SortAlgos.selectionSort(myArray); 
                 			algo = "Selection Sort";
                         }
